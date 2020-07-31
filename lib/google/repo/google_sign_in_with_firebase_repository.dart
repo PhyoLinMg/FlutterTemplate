@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:template/model/google_login.dart';
+import 'package:template/google/model/google_login.dart';
 
 class GoogleSignInWithFireBaseRepository {
   static Future<GoogleLogin> signInWithGoogle() async {

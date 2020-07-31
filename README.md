@@ -16,13 +16,23 @@
 
   
 
-- Biometric Authentication
+- Biometric Authentication(in Utils.dart)
 
-- Simple Bloc Delegate(if you want to use bloc, it is needed)
+- Simple Bloc Delegate(flutter bloc version 4.0.1) //commented
+
+- Simple Bloc Observer(flutter bloc version 6.0.1)
 
 - Material Theme Colours by Google
 
 - Font Styles
 
+- Network Call 
+
+- Router(Auto Route)
+
+  
+  
+  If you want to get the repo currently I am working on please visit to www.github.com/PhyoLinMg/FlutterTemplate
+  
   
 

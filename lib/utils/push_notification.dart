@@ -34,4 +34,6 @@ class PushNotificationsManager {
       _initialized = true;
     }
   }
+
+  //in main call this pushNotification manager and just call init classd
 }
