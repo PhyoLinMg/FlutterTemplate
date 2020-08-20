@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
-import 'package:template/widgets/dotted_slider.dart';
+import 'package:template/pages/dotted_slider.dart';
 
 //use Dotted Slider
 dottedSlider(List<String> images) {
