@@ -1,15 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:template/localization/app_translations.dart';
+import 'package:template/localization/app_translations_delegate.dart';
+import 'package:template/localization/application.dart';
+import 'package:template/pages/test_lang.dart';
+import 'package:template/utils/shared_prefs.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  AppTranslationsDelegate _newLocaleDelegate;
+
+  @override
+  void initState() {
+    super.initState();
+    _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
+    application.onLocaleChanged = onLocaleChange;
+  }
+
+  void onLocaleChange(Locale locale) {
+    setState(() {
+      _newLocaleDelegate = AppTranslationsDelegate(newLocale: locale);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        _newLocaleDelegate,
+        //provides localised strings
+        GlobalMaterialLocalizations.delegate,
+        //provides RTL support
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale("en", ""),
+        const Locale("my", ""),
+      ],
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,7 +63,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: "ggwp"),
     );
   }
 }
@@ -50,7 +87,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static final List<String> languagesList = application.supportedLanguages;
+  static final List<String> languageCodesList =
+      application.supportedLanguagesCodes;
+  String lang = "";
+  final Map<dynamic, dynamic> languagesMap = {
+    languagesList[0]: languageCodesList[0],
+    languagesList[1]: languageCodesList[1],
+  };
   int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _getLang();
+    application.onLocaleChanged = onLocaleChange;
+  }
+
+  _getLang() async {
+    String language = await SharedPrefs.getString("lang") ?? "my";
+    onLocaleChange(Locale(language));
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -65,6 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("language list" + languagesList.toString());
+    print("language map" + languagesMap.toString());
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -76,6 +135,21 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          PopupMenuButton<String>(
+            // overflow menu
+            onSelected: _select,
+            icon: new Icon(Icons.language, color: Colors.white),
+            itemBuilder: (BuildContext context) {
+              return languagesList.map<PopupMenuItem<String>>((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -98,12 +172,20 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              AppTranslations.of(context).text("counter_text"),
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TestLang()),
+                );
+              },
+            )
           ],
         ),
       ),
@@ -113,5 +195,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _select(String language) {
+    print("dd " + language);
+    onLocaleChange(Locale(languagesMap[language]));
+  }
+
+  void onLocaleChange(Locale locale) async {
+    SharedPrefs.saveString("lang", locale.languageCode);
+    setState(() {
+      AppTranslations.load(locale);
+    });
   }
 }

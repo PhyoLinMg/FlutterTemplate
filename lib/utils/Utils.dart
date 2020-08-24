@@ -28,6 +28,12 @@ class Utils {
     return "Bearer " + stringValue;
   }
 
+  static void saveToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("token", token);
+    print("logging token " + prefs.getString("token"));
+  }
+
   static String convertDateFromString(String strDate, String format) {
     if (strDate == null) {
       return null;
