@@ -26,6 +26,8 @@
 
 - Font Styles
 
+- Language Change(main.dart as settings page and change popupmenuitem into whatever u like) and use the format like TestLng()(Need to update in flutter 1.22)
+
 - Network Call 
 
 - Router(Auto Route)

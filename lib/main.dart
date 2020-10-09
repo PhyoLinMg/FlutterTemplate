@@ -88,6 +88,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //this is setting page and changing the language file
+
   String lang = "";
 
   int _counter = 0;
