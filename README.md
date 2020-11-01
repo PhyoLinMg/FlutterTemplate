@@ -30,9 +30,106 @@
 
 - Router(Auto Route)
 
+- VS code Snippets
+
+  Copy this->Then in VS code Ctrl+Shift+P or F1->Configure User Snippets->choose Dart and paste this
+  
+  Some of them are taken from [ResoCoder](https://resocoder.com/2020/02/11/freezed-data-class-union-in-one-dart-package/) and I added some.
+  
+  ```dart
+  "Part statement": {
+  		"prefix": "pts",
+  		"body": [
+  			"part '${TM_FILENAME_BASE}.g.dart';",
+  		],
+  		"description": "Creates a filled-in part statement"
+  	},
+  	"Part 'Freezed' statement": {
+  		"prefix": "ptf",
+  		"body": [
+  			"part '${TM_FILENAME_BASE}.freezed.dart';",
+  		],
+  		"description": "Creates a filled-in freezed part statement"
+  	},
+  	"Freezed With Bloc Event": {
+  		"prefix": "fAblocE",
+  		"body": [
+  			"@freezed",
+  			"abstract class ${1:DataClassEvent} with _$${1:DatatClassEvent}{",
+  			"   const factory ${1:DataClassEvent}.fetch(${3:Model} model)=_${1:DataClassEvent}FetchEvent;",
+  			"}",
+  		],
+  		"description": "Freezed With Bloc Event API"
+  	},
+  	"Freezed With Bloc State": {
+  		"prefix": "fAblocS",
+  		"body": [
+  			"@freezed",
+  			"abstract class ${1:DataClassState} with _$${1:DataClassState}{",
+  			"   const factory ${1:DataClassState}.initial()=${1:DataClassState}Initial",
+  			"   const factory ${1:DataClassState}.loading()=${1:DataClassState}Loading;",
+  			"   const factory ${1:DataClassState}.loaded(${2:Model} model)=${1:DataClassState}Loaded;",
+  			"   const factory ${1:DataClassState}.error(${3:Exception exception})=${1:DataClassState}Error;",
+  			"}",
+  		],
+  		"description": "Freezed With Bloc State API"
+  	},
+  	"Freezed with Bloc file": {
+  		"prefix": "fAbloc",
+  		"body": [
+  			"if(event is ${1:DataClassEvent}FetchEvent){",
+  			"   yield ${2:DataClassState}.loading();",
+  			"   try{",
+  			"       //The response will be api response from server",
+  			"       yield ${2:DataClassState}.loaded(${3:response});",
+  			"   }catch(Exception e){",
+  			"   yield ${2:DataClassState}.error(e);",
+  			"   }",
+  			"}",
+  		],
+  		"description": "Freezed Inside Bloc"
+  	},
+  	"Freezed Data Class": {
+  		"prefix": "fdataclass",
+  		"body": [
+  			"@freezed",
+  			"abstract class ${1:DataClass} with _$${1:DataClass}{",
+  			"  const factory ${1:DataClass}(${2}) = _${1:DataClass};",
+  			"}"
+  		],
+  		"description": "Freezed Data Class"
+  	},
+  	"Freezed Union": {
+  		"prefix": "funion",
+  		"body": [
+  			"@freezed",
+  			"abstract class ${1:Union} with _$${1:Union}{",
+  			"  const factory ${1:Union}.${2}(${4}) = ${3};",
+  			"}"
+  		],
+  		"description": "Freezed Union"
+  	},
+  	"Freezed Union Case": {
+  		"prefix": "funioncase",
+  		"body": [
+  			"const factory ${1:Union}.${2}(${4}) = ${3};"
+  		],
+  		"description": "Freezed Union Case"
+  	},
+  	"From JSON": {
+  		"prefix": "fromJson",
+  		"body": [
+  			"factory ${1}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);"
+  		],
+  		"description": "From JSON"
+  	},
+  ```
   
   
-  If you want to get the repo currently I am working on please visit to www.github.com/PhyoLinMg/FlutterTemplate
+  
+  
+  
+  
   
   
 
