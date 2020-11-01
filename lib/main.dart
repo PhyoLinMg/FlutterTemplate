@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:template/localization/app_translations.dart';
 import 'package:template/localization/app_translations_delegate.dart';
 import 'package:template/localization/application.dart';
 import 'package:template/pages/test_lang.dart';
 import 'package:template/utils/shared_prefs.dart';
+
+import 'utils/constant.dart';
 
 void main() async {
   runApp(MyApp());
@@ -87,14 +88,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static final List<String> languagesList = application.supportedLanguages;
-  static final List<String> languageCodesList =
-      application.supportedLanguagesCodes;
+  //this is setting page and changing the language file
+
   String lang = "";
-  final Map<dynamic, dynamic> languagesMap = {
-    languagesList[0]: languageCodesList[0],
-    languagesList[1]: languageCodesList[1],
-  };
+
   int _counter = 0;
 
   @override
@@ -122,8 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("language list" + languagesList.toString());
-    print("language map" + languagesMap.toString());
+    print("language list" + Constant.languagesList.toString());
+    print("language map" + Constant.languagesMap.toString());
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -141,7 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
             onSelected: _select,
             icon: new Icon(Icons.language, color: Colors.white),
             itemBuilder: (BuildContext context) {
-              return languagesList.map<PopupMenuItem<String>>((String choice) {
+              return Constant.languagesList
+                  .map<PopupMenuItem<String>>((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
                   child: Text(choice),
@@ -199,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _select(String language) {
     print("dd " + language);
-    onLocaleChange(Locale(languagesMap[language]));
+    onLocaleChange(Locale(Constant.languagesMap[language]));
   }
 
   void onLocaleChange(Locale locale) async {
