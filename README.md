@@ -125,8 +125,11 @@
   		],
   		"description": "From JSON"
   	},
+    "To JSON": {
+		  "prefix": "toJson",
+		  "body": [
+			  "Map<String, dynamic> toJson() => _$${1}ToJson(this);"
+		  ],
+		  "description": "To JSON"
+	  },
   ```
-  
-
-  
-
