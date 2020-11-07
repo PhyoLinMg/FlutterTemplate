@@ -31,10 +31,6 @@
 - Network Call 
 
 - Router(Auto Route)
-
-  
-  
-  If you want to get the repo currently I am working on please visit to www.github.com/PhyoLinMg/FlutterTemplate
   
   
 
