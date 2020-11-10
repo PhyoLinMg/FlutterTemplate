@@ -58,7 +58,7 @@
 		"body": [
 			"@freezed",
 			"abstract class ${1:DataClassEvent} with _$${1:DatatClassEvent}{",
-			"   const factory ${1:DataClassEvent}.fetch(${3:Model} model)=_${1:DataClassEvent}FetchEvent;",
+			"   const factory ${1:DataClassEvent}.fetch(${3:Model} model)=${1:DataClassEvent}FetchEvent;",
 			"}",
 		],
 		"description": "Freezed With Bloc Event API"
@@ -68,7 +68,7 @@
 		"body": [
 			"@freezed",
 			"abstract class ${1:DataClassState} with _$${1:DataClassState}{",
-			"   const factory ${1:DataClassState}.initial()=${1:DataClassState}Initial",
+			"   const factory ${1:DataClassState}.initial()=${1:DataClassState}Initial;",
 			"   const factory ${1:DataClassState}.loading()=${1:DataClassState}Loading;",
 			"   const factory ${1:DataClassState}.loaded(${2:Model} model)=${1:DataClassState}Loaded;",
 			"   const factory ${1:DataClassState}.error(${3:Exception exception})=${1:DataClassState}Error;",
@@ -84,7 +84,7 @@
 			"   try{",
 			"       //The response will be api response from server",
 			"       yield ${2:DataClassState}.loaded(${3:response});",
-			"   }catch(Exception e){",
+			"   }on Exception catch(e){",
 			"   yield ${2:DataClassState}.error(e);",
 			"   }",
 			"}",
