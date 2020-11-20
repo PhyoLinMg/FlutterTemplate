@@ -26,9 +26,36 @@
 
 - Font Styles
 
-- Language Change(main.dart as settings page and change popupmenuitem into whatever u like) and use the format like TestLng()(Need to update in flutter 1.22)
+- Language Change
 
 - Network Call 
+
+  In your repository, you have to use ApiResult<T>  in return Future like that.
+
+  ```dart
+  static Future<ApiResult<AddCartResponse>> postAddToCart(
+        AddCartRequest request) async {
+      var token = await Utils.getToken();
+      try {
+        final response = await apiService.postAddCart(token, request);
+        return ApiResult.success(data: response);
+      } catch (e) {
+        return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+      }
+    }
+  ```
+
+  and In bloc,you gonna add like this as follows..
+
+  ```dart
+   final cartList = await CartRepository.checkout(itemId);
+        yield* cartList.when(success: (CheckOutResponse checkOutResponse) async* {
+          yield CartState.loaded(checkOutResponse);
+          
+        }, failure: (NetworkExceptions error) async* {
+          yield CartState.error(error);
+        });
+  ```
 
 - Router(Auto Route)
 
@@ -58,7 +85,7 @@
   		"body": [
   			"@freezed",
   			"abstract class ${1:DataClassEvent} with _$${1:DatatClassEvent}{",
-  			"   const factory ${1:DataClassEvent}.fetch(${3:Model} model)=_${1:DataClassEvent}FetchEvent;",
+  			"   const factory ${1:DataClassEvent}.fetch(${3:Model} model)=${1:DataClassEvent}FetchEvent;",
   			"}",
   		],
   		"description": "Freezed With Bloc Event API"
@@ -68,7 +95,7 @@
   		"body": [
   			"@freezed",
   			"abstract class ${1:DataClassState} with _$${1:DataClassState}{",
-  			"   const factory ${1:DataClassState}.initial()=${1:DataClassState}Initial",
+  			"   const factory ${1:DataClassState}.initial()=${1:DataClassState}Initial;",
   			"   const factory ${1:DataClassState}.loading()=${1:DataClassState}Loading;",
   			"   const factory ${1:DataClassState}.loaded(${2:Model} model)=${1:DataClassState}Loaded;",
   			"   const factory ${1:DataClassState}.error(${3:Exception exception})=${1:DataClassState}Error;",
@@ -84,7 +111,7 @@
   			"   try{",
   			"       //The response will be api response from server",
   			"       yield ${2:DataClassState}.loaded(${3:response});",
-  			"   }catch(Exception e){",
+  			"   }on Exception catch(e){",
   			"   yield ${2:DataClassState}.error(e);",
   			"   }",
   			"}",
@@ -125,8 +152,38 @@
   		],
   		"description": "From JSON"
   	},
+  	"To JSON": {
+  		"prefix": "toJson",
+  		"body": [
+  			"Map<String, dynamic> toJson() => _$${1}ToJson(this);"
+		],
+  		"description": "To JSON"
+  	},
+  	"Json Model": {
+  		"prefix": "jmodel",
+  		"body": [
+  			"import 'package:json_annotation/json_annotation.dart';",
+  			"",
+  			"part '${TM_FILENAME_BASE}.g.dart';",
+  			"",
+  			"@JsonSerializable()",
+  			"class ${1:DataClass}{",
+  			"   @JsonKey(name:'')",
+  			"   final value value;",
+  			"",
+  			"   const ${1:DataClass}();",
+  			"",
+  			"   factory ${1}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);",
+  			"",
+  			"   Map<String, dynamic> toJson() => _$${1}ToJson(this);",
+  			"}"
+  		],
+  		"description": "Json Model class"
+  	}
   ```
   
-
+  
+  
+  
   
 
