@@ -25,7 +25,26 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+<<<<<<< HEAD
   auto_route: ^0.6.6
+=======
+  flutter_bloc: ^6.1.0
+  # firebase_messaging: ^6.0.16
+  # flutter_facebook_login: ^3.0.0
+  # google_sign_in: ^4.5.1
+  # firebase_auth: ^0.16.1
+  local_auth: ^0.6.3+4
+  shared_preferences: ^0.5.12+4
+  auto_route: ^0.6.6
+
+  retrofit: ^1.3.4+1
+  logger: ^0.9.4
+
+  dio: ^3.0.10
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   cupertino_icons: ^0.1.3
   dio: ^3.0.10
   flutter_bloc: ^6.0.1
@@ -42,11 +61,18 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+<<<<<<< HEAD
   auto_route_generator: ^0.6.8
   build_runner: ^1.10.1
   freezed: ^0.12.2
   json_serializable: ^3.3.0
   retrofit_generator: ^1.3.7+5
+=======
+  json_serializable: ^3.5.0
+  retrofit_generator: ^1.4.0+1
+  auto_route_generator: ^0.6.10
+  build_runner: ^1.10.4
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -58,9 +84,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/locale/localization_en.json
-    - assets/locale/localization_my.json
+  
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

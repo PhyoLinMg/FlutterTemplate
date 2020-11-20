@@ -63,7 +63,11 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.5.1"
+=======
+    version: "1.5.0"
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   build_config:
     dependency: transitive
     description:
@@ -91,14 +95,22 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.10.6"
+=======
+    version: "1.10.4"
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   build_runner_core:
     dependency: transitive
     description:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "6.1.1"
+=======
+    version: "6.0.3"
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   built_collection:
     dependency: transitive
     description:
@@ -189,7 +201,11 @@ packages:
       name: dart_style
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.3.10"
+=======
+    version: "1.3.9"
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   dio:
     dependency: "direct main"
     description:
@@ -236,7 +252,11 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "6.1.1"
+=======
+    version: "6.1.0"
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -447,7 +467,11 @@ packages:
       name: path_provider_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.0.4"
+=======
+    version: "1.0.3"
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   path_provider_windows:
     dependency: transitive
     description:
@@ -697,7 +721,11 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.7.4"
+=======
+    version: "1.7.3"
+>>>>>>> e0afa4add8c7c417e3c44d3811a8b820e7027d48
   xdg_directories:
     dependency: transitive
     description:

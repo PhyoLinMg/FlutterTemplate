@@ -65,8 +65,9 @@
   
   Some of them are taken from [ResoCoder](https://resocoder.com/2020/02/11/freezed-data-class-union-in-one-dart-package/) and I added some.
   
-  ```dart
+  ```json
   "Part statement": {
+<<<<<<< HEAD
   		"prefix": "pts",
   		"body": [
   			"part '${TM_FILENAME_BASE}.g.dart';",
@@ -181,9 +182,5 @@
   		"description": "Json Model class"
   	}
   ```
-  
-  
-  
-  
   
 
