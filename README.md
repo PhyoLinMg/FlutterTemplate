@@ -67,7 +67,6 @@
   
   ```json
   "Part statement": {
-<<<<<<< HEAD
   		"prefix": "pts",
   		"body": [
   			"part '${TM_FILENAME_BASE}.g.dart';",
