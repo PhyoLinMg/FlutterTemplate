@@ -67,119 +67,134 @@
   
   ```json
   "Part statement": {
-  		"prefix": "pts",
-  		"body": [
-  			"part '${TM_FILENAME_BASE}.g.dart';",
-  		],
-  		"description": "Creates a filled-in part statement"
-  	},
-  	"Part 'Freezed' statement": {
-  		"prefix": "ptf",
-  		"body": [
-  			"part '${TM_FILENAME_BASE}.freezed.dart';",
-  		],
-  		"description": "Creates a filled-in freezed part statement"
-  	},
-  	"Freezed With Bloc Event": {
-  		"prefix": "fAblocE",
-  		"body": [
-  			"@freezed",
-  			"abstract class ${1:DataClassEvent} with _$${1:DatatClassEvent}{",
-  			"   const factory ${1:DataClassEvent}.fetch(${3:Model} model)=${1:DataClassEvent}FetchEvent;",
-  			"}",
-  		],
-  		"description": "Freezed With Bloc Event API"
-  	},
-  	"Freezed With Bloc State": {
-  		"prefix": "fAblocS",
-  		"body": [
-  			"@freezed",
-  			"abstract class ${1:DataClassState} with _$${1:DataClassState}{",
-  			"   const factory ${1:DataClassState}.initial()=${1:DataClassState}Initial;",
-  			"   const factory ${1:DataClassState}.loading()=${1:DataClassState}Loading;",
-  			"   const factory ${1:DataClassState}.loaded(${2:Model} model)=${1:DataClassState}Loaded;",
-  			"   const factory ${1:DataClassState}.error(${3:Exception exception})=${1:DataClassState}Error;",
-  			"}",
-  		],
-  		"description": "Freezed With Bloc State API"
-  	},
-  	"Freezed with Bloc file": {
-  		"prefix": "fAbloc",
-  		"body": [
-  			"if(event is ${1:DataClassEvent}FetchEvent){",
-  			"   yield ${2:DataClassState}.loading();",
-  			"   try{",
-  			"       //The response will be api response from server",
-  			"       yield ${2:DataClassState}.loaded(${3:response});",
-  			"   }on Exception catch(e){",
-  			"   yield ${2:DataClassState}.error(e);",
-  			"   }",
-  			"}",
-  		],
-  		"description": "Freezed Inside Bloc"
-  	},
-  	"Freezed Data Class": {
-  		"prefix": "fdataclass",
-  		"body": [
-  			"@freezed",
-  			"abstract class ${1:DataClass} with _$${1:DataClass}{",
-  			"  const factory ${1:DataClass}(${2}) = _${1:DataClass};",
-  			"}"
-  		],
-  		"description": "Freezed Data Class"
-  	},
-  	"Freezed Union": {
-  		"prefix": "funion",
-  		"body": [
-  			"@freezed",
-  			"abstract class ${1:Union} with _$${1:Union}{",
-  			"  const factory ${1:Union}.${2}(${4}) = ${3};",
-  			"}"
-  		],
-  		"description": "Freezed Union"
-  	},
-  	"Freezed Union Case": {
-  		"prefix": "funioncase",
-  		"body": [
-  			"const factory ${1:Union}.${2}(${4}) = ${3};"
-  		],
-  		"description": "Freezed Union Case"
-  	},
-  	"From JSON": {
-  		"prefix": "fromJson",
-  		"body": [
-  			"factory ${1}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);"
-  		],
-  		"description": "From JSON"
-  	},
-  	"To JSON": {
-  		"prefix": "toJson",
-  		"body": [
-  			"Map<String, dynamic> toJson() => _$${1}ToJson(this);"
+		"prefix": "pts",
+		"body": [
+			"part '${TM_FILENAME_BASE}.g.dart';",
 		],
-  		"description": "To JSON"
-  	},
-  	"Json Model": {
-  		"prefix": "jmodel",
-  		"body": [
-  			"import 'package:json_annotation/json_annotation.dart';",
-  			"",
-  			"part '${TM_FILENAME_BASE}.g.dart';",
-  			"",
-  			"@JsonSerializable()",
-  			"class ${1:DataClass}{",
-  			"   @JsonKey(name:'')",
-  			"   final value value;",
-  			"",
-  			"   const ${1:DataClass}();",
-  			"",
-  			"   factory ${1}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);",
-  			"",
-  			"   Map<String, dynamic> toJson() => _$${1}ToJson(this);",
-  			"}"
-  		],
-  		"description": "Json Model class"
-  	}
+		"description": "Creates a filled-in part statement"
+	},
+	"Part 'Freezed' statement": {
+		"prefix": "ptf",
+		"body": [
+			"part '${TM_FILENAME_BASE}.freezed.dart';",
+		],
+		"description": "Creates a filled-in freezed part statement"
+	},
+	"Freezed With Bloc Event": {
+		"prefix": "fAblocE",
+		"body": [
+			"@freezed",
+			"abstract class ${1:DataClassEvent} with _$${1:DatatClassEvent}{",
+			"   const factory ${1:DataClassEvent}.fetch(${3:Model} model)=${1:DataClassEvent}FetchEvent;",
+			"}",
+		],
+		"description": "Freezed With Bloc Event API"
+	},
+	"Freezed With Bloc State": {
+		"prefix": "fAblocS",
+		"body": [
+			"@freezed",
+			"abstract class ${1:DataClassState} with _$${1:DataClassState}{",
+			"   const factory ${1:DataClassState}.initial()=${1:DataClassState}Initial;",
+			"   const factory ${1:DataClassState}.loading()=${1:DataClassState}Loading;",
+			"   const factory ${1:DataClassState}.loaded(${2:Model} model)=${1:DataClassState}Loaded;",
+			"   const factory ${1:DataClassState}.error(${3:NetworkExceptions exception})=${1:DataClassState}Error;",
+			"}",
+		],
+		"description": "Freezed With Bloc State API"
+	},
+	"Freezed with Bloc file": {
+		"prefix": "fAbloc",
+		"body": [
+			"if(event is ${2:DataClassEvent}FetchEvent){",
+			"   yield ${1:DataClassState}.loading();",
+			"   final apiResult=await Repository.method();",
+			"   yield* apiResult.when(success:(Model model) async*{",
+			"      yield ${1:DataClassState}.loaded(model);",
+			"   }, failure: (NetworkExceptions error) async*{",
+			"      yield ${1:DataClassState}.error(error);",
+			"   });",
+			"}",
+		],
+		"description": "Freezed Inside Bloc"
+	},
+	"Repo Create": {
+		"prefix": "repo",
+		"body": [
+			"static Future<ApiResult<Model>> method() async{",
+			"  var token=await Utils.getToken();",
+			"  try{",
+			"      final response=await getIt<ApiService>().method();",
+			"      return ApiResult.success(data:response);",
+			"  }catch(e){",
+			"      return ApiResult.failure(error:NetworkExceptions.getDioException(e));",
+			"  }",
+			"}"
+		],
+		"description": "Repository Create"
+	},
+	"Freezed Data Class": {
+		"prefix": "fdataclass",
+		"body": [
+			"@freezed",
+			"abstract class ${1:DataClass} with _$${1:DataClass}{",
+			"  const factory ${1:DataClass}(${2}) = _${1:DataClass};",
+			"}"
+		],
+		"description": "Freezed Data Class"
+	},
+	"Freezed Union": {
+		"prefix": "funion",
+		"body": [
+			"@freezed",
+			"abstract class ${1:Union} with _$${1:Union}{",
+			"  const factory ${1:Union}.${2}(${4}) = ${3};",
+			"}"
+		],
+		"description": "Freezed Union"
+	},
+	"Freezed Union Case": {
+		"prefix": "funioncase",
+		"body": [
+			"const factory ${1:Union}.${2}(${4}) = ${3};"
+		],
+		"description": "Freezed Union Case"
+	},
+	"From JSON": {
+		"prefix": "fromJson",
+		"body": [
+			"factory ${1}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);"
+		],
+		"description": "From JSON"
+	},
+	"To JSON": {
+		"prefix": "toJson",
+		"body": [
+			"Map<String, dynamic> toJson() => _$${1}ToJson(this);"
+		],
+		"description": "To JSON"
+	},
+	"Json Model": {
+		"prefix": "jmodel",
+		"body": [
+			"import 'package:json_annotation/json_annotation.dart';",
+			"",
+			"part '${TM_FILENAME_BASE}.g.dart';",
+			"",
+			"@JsonSerializable()",
+			"class ${1:DataClass}{",
+			"   @JsonKey(name:'')",
+			"   final value value;",
+			"",
+			"   const ${1:DataClass}();",
+			"",
+			"   factory ${1}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);",
+			"",
+			"   Map<String, dynamic> toJson() => _$${1}ToJson(this);",
+			"}"
+		],
+		"description": "Json Model class"
+	}
   ```
   
 
