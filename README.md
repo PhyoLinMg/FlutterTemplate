@@ -13,8 +13,7 @@
   ```dart
   final GoogleLogin login=await GoogleSignInWithFirebaseRepository().signInWithGoogle();
   ```
-
-  
+- [Pagination ListView(Tested)](https://pub.dev/packages/infinite_scroll_pagination)
 
 - Biometric Authentication(in Utils.dart)
 
