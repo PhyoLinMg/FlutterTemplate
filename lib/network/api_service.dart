@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:template/network/request_interceptor.dart';
 
 part 'api_service.g.dart';
 
@@ -9,6 +10,7 @@ abstract class ApiService {
 
   static ApiService create() {
     final dio = Dio();
+    dio.interceptors.add(RequestInterceptor());
     dio.options.headers["Content-Type"] = "application/json";
     return ApiService(dio);
   }
