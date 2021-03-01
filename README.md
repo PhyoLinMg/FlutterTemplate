@@ -23,11 +23,11 @@
 
 - Material Theme Colours by Google
 
-- Font Styles
+- Font Styles 
 
 - Language Change
 
-- Network Call 
+- Network Call(No need to add token because of RequestInterceptor)
 
   In your repository, you have to use ApiResult<T>  in return Future like that.
 
@@ -121,7 +121,6 @@
 		"prefix": "repo",
 		"body": [
 			"static Future<ApiResult<Model>> method() async{",
-			"  var token=await Utils.getToken();",
 			"  try{",
 			"      final response=await getIt<ApiService>().method();",
 			"      return ApiResult.success(data:response);",
